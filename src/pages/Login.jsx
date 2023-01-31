@@ -2,10 +2,12 @@ import React, { useRef } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import { Container, Row, Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import app from "../firebase.init";
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail} from "firebase/auth";
 import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/UserContext";
 
 const auth = getAuth(app);
 
@@ -13,6 +15,13 @@ const Login = () => {
 
   const [success, setSuccess] = useState(false);
   const [email, setEmail] = useState('');
+
+  const {signIn} = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/'
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -22,16 +31,16 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    signInWithEmailAndPassword(auth, email, password)
-    .then ( result => {
+    signIn(email, password)
+    .then(result => {
       const user = result.user;
       console.log(user);
       setSuccess(true);
+      navigate(from, {replace: true});
     })
-
     .catch (error => {
-      console.error('error', error);
-    })
+        console.error('error', error);
+      })
   };
 
   const handleEmailBlur = event => {

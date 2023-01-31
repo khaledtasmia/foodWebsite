@@ -24,7 +24,7 @@ import foodCategoryImg03 from "../assets/images/bread.png";
 
 import ProductCard from "../components/UI/product-card/ProductCard.jsx";
 
-import whyImg from "../assets/images/page3.jpg";
+// import whyImg from "../assets/images/page3.jpg";
 
 import networkImg from "../assets/images/network.png";
 

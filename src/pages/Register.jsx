@@ -3,11 +3,13 @@ import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from "firebase/auth";
+import { getAuth, sendEmailVerification, updateProfile } from "firebase/auth";
 import app from "../firebase.init";
 import { useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import '../styles/product-details.css';
+import { useContext } from "react";
+import { AuthContext } from "../contexts/UserContext";
 
 
 const auth = getAuth(app);
@@ -21,7 +23,7 @@ const Register = () => {
   const [emailMessage, setEmailMessage] = useState('');
   const [success, setSuccess] = useState(false);
 
-
+  const { createUser } = useContext(AuthContext);
 
   const handleNameBlur = event => {
     setName(event.target.value);
@@ -60,23 +62,10 @@ const Register = () => {
     const password = form.password.value;
     console.log(name, email, password);
 
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-      // return;
-    }
-
-    if (!/(?=.*?[#?!@$%^&*-])/.test(password)) {
-      setPasswordError('Password must be minimum eight in length and contain at least one special character');
-      return;
-    }
-
-    setValidated(true);
-
-
-    createUserWithEmailAndPassword(auth, email, password, name)
+    createUser(email, password, name)
       .then(result => {
         const user = result.user;
-        console.log(user);
+        console.log('registered user', user);
         setName('');
         setEmail('');
         setPassword('');
@@ -88,6 +77,18 @@ const Register = () => {
       .catch(error => {
         console.error(error);
       })
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+      // return;
+    }
+
+    if (!/(?=.*?[#?!@$%^&*-])/.test(password)) {
+      setPasswordError('Password must be minimum eight in length and contain at least one special character');
+      return;
+    }
+
+    setValidated(true);
     event.preventDefault();
   };
 
@@ -102,12 +103,12 @@ const Register = () => {
     updateProfile(auth.currentUser, {
       displayName: name
     })
-    .then( () => {
-      console.log('display name updated');
-    })
-    .catch(error => {
-      console.error(error);
-    })
+      .then(() => {
+        console.log('display name updated');
+      })
+      .catch(error => {
+        console.error(error);
+      })
   }
 
   const addTOCart__btn = {

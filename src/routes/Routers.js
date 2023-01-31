@@ -9,6 +9,7 @@ import Checkout from "../pages/Checkout";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import PrivateRoute from "./PrivateRoute";
 
 
 const Routers = () => {
@@ -19,10 +20,10 @@ const Routers = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/foods" element={<AllFoods />} />
         <Route path="/foods/:id" element={<FoodDetails />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
   );

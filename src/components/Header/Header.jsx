@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { cartUiActions } from "../../store/shopping-cart/cartUiSlice";
 import "../../styles/header.css";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/UserContext";
 
 const nav__links = [
   {
@@ -28,6 +30,15 @@ const nav__links = [
 ];
 
 const Header = () => {
+
+  const { user, logOut } = useContext(AuthContext);
+  console.log('context', user);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => { })
+      .catch(error => console.error(error));
+  }
 
   const menuRef = useRef(null);
   const headerRef = useRef(null);
@@ -86,13 +97,19 @@ const Header = () => {
               <i class="ri-shopping-basket-line"></i>
               <span className="cart__badge">{totalQuantity}</span>
             </span>
-
-            <span className="user">
-              <Link to="/login">
-                <i class="ri-user-line"></i>
-              </Link>
-            </span>
-
+            {
+              user?.displayName && <span className="fw-bold">{user.displayName} </span>}
+            {
+              user?.displayName ?
+                <button onClick={handleLogOut} className="btn btn-outline-dark btn-sm fw-bold">
+                  Log Out
+                </button>
+                : <span className="user">
+                  <Link to="/login">
+                    <i class="ri-user-line"></i>
+                  </Link>
+                </span>
+            }
             <span className="mobile__menu" onClick={toggleMenu}>
               <i class="ri-menu-line"></i>
             </span>
