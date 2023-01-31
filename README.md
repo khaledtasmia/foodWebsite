@@ -22,7 +22,9 @@
 1. React.js
 2. Redux Toolkit
 3. ReactStrap
-4. CSS
+4. React Router Dom
+5. Firebase Authentication
+6. CSS
 
 ### How to start?
 
