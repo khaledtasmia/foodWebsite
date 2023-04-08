@@ -10,6 +10,7 @@ import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "./PrivateRoute";
+import Detection from "../pages/Detection";
 
 
 const Routers = () => {
@@ -21,6 +22,7 @@ const Routers = () => {
         <Route path="/foods" element={<AllFoods />} />
         <Route path="/foods/:id" element={<FoodDetails />} />
         <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
+        <Route path="/detection" element={<Detection />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />

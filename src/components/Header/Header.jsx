@@ -63,7 +63,7 @@ const Header = () => {
       }
     });
 
-    return () => window.removeEventListener("scroll");
+    return () => window.removeEventListener("scroll", null);
   }, []);
 
   return (
@@ -93,6 +93,10 @@ const Header = () => {
 
           {/* ======== nav right icons ========= */}
           <div className="nav__right d-flex align-items-center gap-4">
+            <span className="cart__icon">
+              <Link to="/detection">
+              <i class="ri-camera-line"></i></Link>
+            </span>
             <span className="cart__icon" onClick={toggleCart}>
               <i class="ri-shopping-basket-line"></i>
               <span className="cart__badge">{totalQuantity}</span>

@@ -66,25 +66,25 @@ const Home = () => {
       setAllProducts(products);
     }
 
-    if (category === "BURGER") {
+    if (category === "STARTER") {
       const filteredProducts = products.filter(
-        (item) => item.category === "Burger"
+        (item) => item.category === "Starter"
       );
 
       setAllProducts(filteredProducts);
     }
 
-    if (category === "PIZZA") {
+    if (category === "MAIN COURSE") {
       const filteredProducts = products.filter(
-        (item) => item.category === "Pizza"
+        (item) => item.category === "Main Course"
       );
 
       setAllProducts(filteredProducts);
     }
 
-    if (category === "BREAD") {
+    if (category === "DESSERT") {
       const filteredProducts = products.filter(
-        (item) => item.category === "Bread"
+        (item) => item.category === "Dessert"
       );
 
       setAllProducts(filteredProducts);
@@ -201,30 +201,30 @@ const Home = () => {
                   All
                 </button>
                 <button
-                  className={`d-flex align-items-center gap-2 ${category === "BURGER" ? "foodBtnActive" : ""
+                  className={`d-flex align-items-center gap-2 ${category === "STARTER" ? "foodBtnActive" : ""
                     } `}
-                  onClick={() => setCategory("BURGER")}
+                  onClick={() => setCategory("STARTER")}
                 >
                   <img src={foodCategoryImg01} alt="" />
-                  Burger
+                  Starter
                 </button>
 
                 <button
-                  className={`d-flex align-items-center gap-2 ${category === "PIZZA" ? "foodBtnActive" : ""
+                  className={`d-flex align-items-center gap-2 ${category === "MAIN COURSE" ? "foodBtnActive" : ""
                     } `}
-                  onClick={() => setCategory("PIZZA")}
+                  onClick={() => setCategory("MAIN COURSE")}
                 >
                   <img src={foodCategoryImg02} alt="" />
-                  Pizza
+                  Main Course
                 </button>
 
                 <button
-                  className={`d-flex align-items-center gap-2 ${category === "BREAD" ? "foodBtnActive" : ""
+                  className={`d-flex align-items-center gap-2 ${category === "DESSERT" ? "foodBtnActive" : ""
                     } `}
-                  onClick={() => setCategory("BREAD")}
+                  onClick={() => setCategory("DESSERT")}
                 >
                   <img src={foodCategoryImg03} alt="" />
-                  Bread
+                  Dessert
                 </button>
               </div>
             </Col>
