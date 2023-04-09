@@ -1,8 +1,8 @@
 ## Food Ordering App
 
 ### Features:
-###hello wrld
----
+
+## ###hello world
 
 ##### Here's features included in this project
 
